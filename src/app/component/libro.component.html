@@ -1,0 +1,55 @@
+<h1>Libros</h1>
+<button type="button" class="btn btn-primary" (click)="abrirModalLibro(libro)">Nuevo Libro</button>
+<hr>
+<ag-grid-angular
+  style="width: 100%; height: 200px;"
+  class="ag-theme-alpine"
+  [rowData]="libros"
+  [columnDefs]="columnDefsLibro"
+  [frameworkComponents]="frameworkComponents"
+  [gridOptions]="gridOptions"
+>
+</ag-grid-angular>
+
+<ng-template #libro let-modal>
+  <form autocomplete="off" [formGroup]="formularioLibro" (ngSubmit)="guardarLibro()" method="post">
+  <div class="modal-header">
+    <h4 class="modal-title">Libro</h4>
+    <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+        <fieldset>
+          <label class="label">Nombre <b>*</b></label>
+          <input type="text" placeholder="Nombre" formControlName="nombre" class="form-control" [class.is-invalid]="NombreNoValido">
+        </fieldset>
+        <fieldset>
+          <label class="label">Descripción <b>*</b></label>
+          <input type="text" placeholder="Descripción" formControlName="descripcion" class="form-control" [class.is-invalid]="DescripcionNoValido">
+        </fieldset>
+        <fieldset>
+          <label class="label">Autor <b>*</b></label>
+          <input type="text" placeholder="Autor" formControlName="autor" class="form-control" [class.is-invalid]="AutorNoValido">
+        </fieldset>
+        <fieldset>
+          <label class="label">Fecha <b>*</b></label>
+          <input type="date" placeholder="Fecha" formControlName="fecha" class="form-control" [class.is-invalid]="FechaNoValido">
+        </fieldset>
+        <fieldset>
+          <label class="label">Ejemplares <b>*</b></label>
+          <input type="number" placeholder="Ejemplares" formControlName="ejemplares" class="form-control" [class.is-invalid]="EjemplaresNoValido">
+        </fieldset>
+        <fieldset>
+          <label class="label">Costo <b>*</b></label>
+          <input type="number" placeholder="Costo" formControlName="costo" class="form-control" [class.is-invalid]="CostoNoValido">
+        </fieldset>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn btn-dark" (click)="modal.close('Cancelar click')">Cancelar</button>
+    <button type="submit" class="btn btn-success">Guardar</button>
+  </div>
+  </form>
+</ng-template>
